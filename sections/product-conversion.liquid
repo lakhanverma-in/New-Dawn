@@ -1,0 +1,368 @@
+{% assign product = all_products[section.settings.product] %}
+
+<section class="pcv-section"
+  style="
+    background: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  ">
+
+  <div class="page-width">
+
+    <div class="pcv-grid">
+
+      <!-- IMAGE -->
+      <div class="pcv-media">
+        {% if product.featured_image %}
+          <img 
+            src="{{ product.featured_image | img_url: '1024x' }}" 
+            alt="{{ product.title }}" 
+            loading="lazy">
+        {% endif %}
+      </div>
+
+      <!-- CONTENT -->
+      <div class="pcv-content">
+
+        <h1 class="pcv-title">{{ product.title }}</h1>
+
+        <div class="pcv-price">
+          <span class="now">{{ product.price | money }}</span>
+
+          {% if product.compare_at_price > product.price %}
+            <span class="was">{{ product.compare_at_price | money }}</span>
+          {% endif %}
+        </div>
+
+        <!-- DESCRIPTION -->
+        {% if section.settings.show_description and product.description != blank %}
+          <div class="pcv-desc">
+            {{ product.description | strip_html | truncate: 200 }}
+          </div>
+        {% endif %}
+
+        <!-- VARIANTS -->
+        {% if section.settings.show_variants and product.has_only_default_variant == false %}
+          <div class="pcv-swatches">
+            {% for variant in product.variants %}
+              <button 
+                class="swatch"
+                data-id="{{ variant.id }}"
+                onclick="selectVariant({{ variant.id }}, this)">
+                {{ variant.option1 }}
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <!-- QUANTITY -->
+        {% if section.settings.show_quantity %}
+        <div class="pcv-qty">
+          <button type="button" onclick="qtyChange(-1)">−</button>
+          <input type="number" id="qty" value="1" min="1">
+          <button type="button" onclick="qtyChange(1)">+</button>
+        </div>
+        {% endif %}
+
+        <!-- ADD TO CART -->
+        <button class="pcv-btn" onclick="addToCart()">
+          {{ section.settings.button_text }}
+        </button>
+
+        <!-- TRUST -->
+        <div class="pcv-trust">
+          {% for block in section.blocks %}
+            <div class="trust-item">✓ {{ block.settings.text }}</div>
+          {% endfor %}
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- STICKY BAR -->
+<div class="pcv-sticky">
+  <div class="sticky-left">
+    <span>{{ product.title }}</span>
+    <strong>{{ product.price | money }}</strong>
+  </div>
+  <button onclick="addToCart()">Add to Cart</button>
+</div>
+
+<style>
+.pcv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.pcv-media img {
+  width: 100%;
+  border-radius: 18px;
+}
+
+.pcv-title {
+  font-size: 42px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.pcv-price {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.now {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.was {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.pcv-desc {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* SWATCHES */
+.pcv-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.swatch {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.swatch:hover {
+  transform: translateY(-2px);
+}
+
+.swatch.active {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+/* QTY */
+.pcv-qty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.pcv-qty button {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.pcv-qty input {
+  width: 60px;
+  text-align: center;
+  border: 1px solid #ddd;
+  height: 38px;
+  border-radius: 8px;
+}
+
+/* BUTTON */
+.pcv-btn {
+  width: 100%;
+  padding: 16px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* TRUST */
+.pcv-trust {
+  margin-top: 15px;
+  font-size: 13px;
+  color: #444;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* STICKY BAR */
+.pcv-sticky {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 20px;
+  align-items: center;
+  z-index: 999;
+}
+
+/* MOBILE */
+@media(max-width: 768px) {
+  .pcv-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .pcv-title {
+    font-size: 28px;
+  }
+}
+</style>
+
+<script>
+let selectedVariant = null;
+
+document.addEventListener("DOMContentLoaded", function () {
+  const first = document.querySelector(".swatch");
+
+  if(first){
+    first.click();
+  } else {
+    selectedVariant = {{ product.selected_or_first_available_variant.id }};
+  }
+});
+
+function selectVariant(id, el){
+  selectedVariant = id;
+  document.querySelectorAll('.swatch').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function qtyChange(val){
+  let qty = document.getElementById("qty");
+  qty.value = Math.max(1, parseInt(qty.value) + val);
+}
+
+function addToCart(){
+  const btn = document.querySelector(".pcv-btn");
+  btn.innerText = "Adding...";
+
+  fetch('/cart/add.js', {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      id: selectedVariant,
+      quantity: parseInt(document.getElementById("qty").value)
+    })
+  })
+  .then(res => res.json())
+  .then(() => {
+    btn.innerText = "Added ✓";
+    setTimeout(() => {
+      btn.innerText = "{{ section.settings.button_text }}";
+    }, 1200);
+  });
+}
+</script>
+
+{% schema %}
+{
+  "name": "Product Conversion",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Select Product"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Add to Cart Button Text",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Section Top Padding",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Section Bottom Padding",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show Description",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variants",
+      "label": "Show Variants",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quantity",
+      "label": "Show Quantity",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Trust Badge",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Trust Text",
+          "default": "Free Shipping"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Conversion",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

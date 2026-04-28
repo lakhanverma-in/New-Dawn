@@ -1,0 +1,302 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow_UC8q3g": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_4gMr37": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_13_1800x1000_01166df6-2a63-4abf-a6a7-63bb0e6789f8.png",
+            "mobile_image": "shopify://shop_images/Untitled_900_x_900_px_1_750x750_67d8dbed-6a21-4946-aca4-e15460c16ea2.png",
+            "image_overlay_opacity": 0,
+            "heading": "Get Audio On YourStandard Today!",
+            "heading_size": "h1",
+            "subheading": "Electra Glide Standard Audio",
+            "sub_color": "#ffffff",
+            "button_label": "Explore Now",
+            "link": "shopify://collections",
+            "button_style_secondary": true,
+            "show_text_box": false,
+            "box_align": "middle-left",
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "color_scheme": "scheme-1"
+          }
+        }
+      },
+      "block_order": [
+        "slide_4gMr37"
+      ],
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "medium",
+        "slider_visual": "counter",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "image_behavior": "none",
+        "show_text_below": false,
+        "accessibility_info": "Slideshow about our brand",
+        "btn_bg": "#ffffff",
+        "btn_text": "#202020",
+        "btn_hover_bg": "#e35223",
+        "btn_hover_text": "#ffffff"
+      }
+    },
+    "featured_product_ybpykD": {
+      "type": "featured-product",
+      "blocks": {
+        "rating_NwUExM": {
+          "type": "rating",
+          "disabled": true,
+          "settings": {}
+        },
+        "text_nVNPVc": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title_tpVdLt": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "price_ciTMbD": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_PWbJNg": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector_7W6Uqf": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons_9CdhEC": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "icon_with_text_jakXVj": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "horizontal",
+            "icon_1": "heart",
+            "heading_1": "Best Service",
+            "icon_2": "return",
+            "heading_2": "Easy Returns",
+            "icon_3": "truck",
+            "heading_3": "Fast Shipping"
+          }
+        },
+        "share_fNQXap": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "rating_NwUExM",
+        "text_nVNPVc",
+        "title_tpVdLt",
+        "price_ciTMbD",
+        "variant_picker_PWbJNg",
+        "quantity_selector_7W6Uqf",
+        "buy_buttons_9CdhEC",
+        "icon_with_text_jakXVj",
+        "share_fNQXap"
+      ],
+      "name": "t:sections.featured-product.presets.name",
+      "settings": {
+        "product": "the-complete-snowboard",
+        "color_scheme": "scheme-3",
+        "secondary_background": true,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": true,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "multicolumn_AMckyk": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_QWaGxM": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Apr_27_2026_12_37_55_PM.png",
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_jzKYzy": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Apr_27_2026_12_37_55_PM.png",
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_W8txgr": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Apr_27_2026_12_37_55_PM.png",
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_hKdeXm": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Apr_27_2026_12_37_55_PM.png",
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_QWaGxM",
+        "column_jzKYzy",
+        "column_W8txgr",
+        "column_hKdeXm"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "Benefits",
+        "heading_size": "h1",
+        "image_width": "third",
+        "image_ratio": "circle",
+        "button_label": "",
+        "button_link": "shopify://collections",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "custom_social_proof_dqQXKq": {
+      "type": "custom-social-proof",
+      "blocks": {
+        "review_BiYNMm": {
+          "type": "review",
+          "settings": {
+            "name": "Sarah J.",
+            "rating": 5,
+            "review": "<p>The best shapewear I've ever owned!</p>"
+          }
+        },
+        "review_hyLJXc": {
+          "type": "review",
+          "settings": {
+            "name": "Sarah J.",
+            "rating": 5,
+            "review": "<p>The best shapewear I've ever owned!</p>"
+          }
+        },
+        "review_kKcpD3": {
+          "type": "review",
+          "settings": {
+            "name": "Sarah J.",
+            "rating": 5,
+            "review": "<p>The best shapewear I've ever owned!</p>"
+          }
+        },
+        "review_iTj6dw": {
+          "type": "review",
+          "settings": {
+            "name": "Sarah J.",
+            "rating": 5,
+            "review": "<p>The best shapewear I've ever owned!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "review_BiYNMm",
+        "review_hyLJXc",
+        "review_kKcpD3",
+        "review_iTj6dw"
+      ],
+      "name": "Social Proof",
+      "settings": {
+        "heading": "Social Proof",
+        "description": "<p>Real results from real customers.</p>",
+        "heading_alignment": "center",
+        "heading_size": 40,
+        "bg_color": "#f6f6f6",
+        "text_color": "#202020",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "show_arrows": true
+      }
+    },
+    "final_cta_3p3Ptt": {
+      "type": "final-cta",
+      "name": "Final CTA",
+      "settings": {
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "bg_color": "#050505",
+        "badge": "Premium Experience",
+        "badge_color": "#ffffff",
+        "badge_size": 12,
+        "heading": "Big conversion banner Limited Release.",
+        "heading_color": "#ffffff",
+        "heading_size": 72,
+        "subtext": "Step into a new era of design. Our latest collection is engineered for those who refuse to settle for average.",
+        "subtext_color": "#ffffff",
+        "subtext_size": 16,
+        "enable_countdown": true,
+        "timer_color": "#ffffff",
+        "timer_size": 32,
+        "button_label": "SECURE YOURS NOW",
+        "button_link": "",
+        "button_bg": "#e35223",
+        "button_text_color": "#ffffff",
+        "btn_size": 15
+      }
+    }
+  },
+  "order": [
+    "slideshow_UC8q3g",
+    "featured_product_ybpykD",
+    "multicolumn_AMckyk",
+    "custom_social_proof_dqQXKq",
+    "final_cta_3p3Ptt"
+  ]
+}

@@ -1,0 +1,285 @@
+{{ 'benefits-slider.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'benefits-slider.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  /* Dynamic styles based on Merchant Settings */
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.pad_top }}px;
+    padding-bottom: {{ section.settings.pad_bottom }}px;
+    background: {{ section.settings.bg_color }};
+  }
+  .section-{{ section.id }} .h-style {
+    font-size: {{ section.settings.heading_size }}px;
+    color: {{ section.settings.heading_color }};
+  }
+  .section-{{ section.id }} .benefit-card-inner {
+    padding: {{ section.settings.card_padding }}px;
+    border-radius: {{ section.settings.card_radius }}px;
+    background: {{ section.settings.card_bg }};
+  }
+  /* Slider column width calculation */
+  .section-{{ section.id }}.slider-enabled .benefit-card {
+    flex: 0 0 calc(100% / {{ section.settings.cols_desktop }});
+  }
+  @media (max-width: 989px) {
+    .section-{{ section.id }}.slider-enabled .benefit-card { flex: 0 0 calc(100% / {{ section.settings.cols_tablet }}); }
+  }
+  @media (max-width: 749px) {
+    .section-{{ section.id }}.slider-enabled .benefit-card { flex: 0 0 calc(100% / {{ section.settings.cols_mobile }}); }
+    .section-{{ section.id }} .h-style { font-size: calc({{ section.settings.heading_size }}px * 0.75); }
+    .section-{{ section.id }} {
+    padding-top: {{ section.settings.pad_top | divided_by:1.6 }}px;
+    padding-bottom: {{ section.settings.pad_bottom | divided_by:1.6 }}px;
+    background: {{ section.settings.bg_color }};
+  }
+  }
+</style>
+
+<section class="section-{{ section.id }} {% if section.settings.enable_slider %}slider-active{% endif %}">
+  <div class="page-width">
+    
+    {% if section.settings.heading != blank %}
+      <div class="section-header align-{{ section.settings.heading_align }}">
+        <h2 class="h-style">{{ section.settings.heading }}</h2>
+      </div>
+    {% endif %}
+
+    <div class="benefits-wrapper">
+
+    {% comment %}
+      <button class="benefit-arrow prev" aria-label="Previous" type="button">‹</button>
+    {% endcomment %}
+
+      <button class="benefit-arrow prev" aria-label="Previous" type="button">
+       <svg viewBox="0 0 10 6"><path d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"/></svg>
+      </button>
+
+      <div class="benefits-track align-{{ section.settings.content_align }}" 
+           data-desktop="{{ section.settings.cols_desktop }}"
+           data-tablet="{{ section.settings.cols_tablet }}"
+           data-mobile="{{ section.settings.cols_mobile }}">
+        
+        {% for block in section.blocks %}
+          <div class="benefit-card" {{ block.shopify_attributes }}>
+            <div class="benefit-card-inner">
+              {% if block.settings.icon != blank %}
+                <div class="benefit-icon">
+                  {{ block.settings.icon | image_url: width: 200 | image_tag: loading: 'lazy', alt: block.settings.heading }}
+                </div>
+              {% endif %}
+
+              {% if block.settings.heading != blank %}
+                <h3 class="b-heading">{{ block.settings.heading }}</h3>
+              {% endif %}
+
+              {% if block.settings.paragraph != blank %}
+                <div class="b-text">{{ block.settings.paragraph }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+    {% comment %}
+      <button class="benefit-arrow next" aria-label="Next" type="button">›</button>
+    {% endcomment %}
+
+      <button class="benefit-arrow next" aria-label="Next" type="button">
+        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+    </svg>
+      </button>
+
+    </div>
+
+    <div class="benefits-dots"></div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Benefits Shapewear",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Controls"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_slider",
+      "label": "Enable Slider",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "cols_desktop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "label": "Desktop Columns",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "cols_tablet",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "label": "Tablet Columns",
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "cols_mobile",
+      "label": "Mobile Columns",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "header",
+      "content": "Section Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading Text",
+      "default": "Why You'll Love It"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Heading Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Box Style & Alignment"
+    },
+    {
+      "type": "select",
+      "id": "content_align",
+      "label": "Box Content Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "label": "Card Padding",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "label": "Card Corner Radius",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Spacing",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Spacing",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Premium Quality"
+        },
+        {
+          "type": "richtext",
+          "id": "paragraph",
+          "label": "Text",
+          "default": "<p>Explain the benefit here.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefits Shapewear",
+      "blocks": [
+        { "type": "benefit" },
+        { "type": "benefit" },
+        { "type": "benefit" },
+        { "type": "benefit" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,383 @@
+<style>
+.f-cta-elite-{{ section.id }} {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+  background: {{ section.settings.bg_color }};
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Animated Mesh Gradient Background */
+.f-elite-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 1;
+}
+
+.f-blob {
+  position: absolute;
+  filter: blur(80px);
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: elite-move 20s infinite alternate;
+}
+
+.f-blob-1 {
+  width: 400px; height: 400px;
+  background: {{ section.settings.button_bg }};
+  top: -100px; left: -100px;
+}
+
+.f-blob-2 {
+  width: 300px; height: 300px;
+  background: {{ section.settings.timer_color }};
+  bottom: -50px; right: -50px;
+  animation-duration: 15s;
+}
+
+@keyframes elite-move {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(100px, 50px) scale(1.2); }
+}
+
+.f-elite-container {
+  position: relative;
+  z-index: 10;
+  max-width: 1000px;
+  width: 100%;
+  padding: 0 20px;
+  text-align: center;
+}
+
+/* Glassmorphism Badge */
+.f-elite-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  margin-bottom: 30px;
+  color: {{ section.settings.badge_color }};
+  font-size: {{ section.settings.badge_size }}px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: elite-float 4s infinite ease-in-out;
+}
+
+/* Cinematic Heading */
+.f-elite-heading {
+  font-weight: 900;
+  line-height: 1.0;
+  margin-bottom: 25px;
+  letter-spacing: -0.04em;
+  color: {{ section.settings.heading_color }};
+  font-size: {{ section.settings.heading_size }}px;
+  /* Text shine effect */
+  background: linear-gradient(to right, {{ section.settings.heading_color }} 20%, {{ section.settings.button_bg }} 50%, {{ section.settings.heading_color }} 80%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: elite-shine 5s linear infinite;
+  margin-top:0px;
+}
+
+@keyframes elite-shine {
+  to { background-position: 200% center; }
+}
+
+.f-elite-subtext {
+  line-height: 1.6;
+  margin: 0 auto 40px;
+  max-width: 650px;
+  opacity: 0.9;
+  color: {{ section.settings.subtext_color }};
+  font-size: {{ section.settings.subtext_size }}px;
+  letter-spacing: 0px;
+  line-height: normal;
+}
+
+/* Timer - Massive & Modern */
+.f-elite-timer {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 50px;
+}
+
+.f-timer-block {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 15px;
+  border-radius: 16px;
+  min-width: 80px;
+}
+
+.f-timer-val {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  color: {{ section.settings.timer_color }};
+  font-size: {{ section.settings.timer_size }}px;
+}
+
+.f-timer-unit {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: {{ section.settings.subtext_color }};
+}
+
+/* High-Interaction Button */
+.f-elite-btn {
+  position: relative;
+  display: inline-flex;
+  padding: 12px 30px;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  background: {{ section.settings.button_bg }};
+  color: {{ section.settings.button_text_color }};
+  font-size: {{ section.settings.btn_size }}px;
+  box-shadow: 0 20px 40px {{ section.settings.button_bg | color_modify: 'alpha', 0.3 }};
+  line-height:normal;
+  letter-spacing: 0px;
+}
+
+.f-elite-btn:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 30px 60px {{ section.settings.button_bg | color_modify: 'alpha', 0.5 }};
+}
+
+@keyframes elite-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 768px) {
+  .f-cta-elite-{{ section.id }} {
+  padding-top: {{ section.settings.padding_top | divided_by: 1.6 }}px;
+  padding-bottom: {{ section.settings.padding_bottom | divided_by: 1.6 }}px;
+  }
+  .f-elite-heading { font-size: calc({{ section.settings.heading_size }}px * 0.6); }
+  .f-timer-block { min-width: 60px; padding: 10px; }
+  .f-timer-val { font-size: calc({{ section.settings.timer_size }}px * 0.7); }
+}
+.f-elite-timer { 
+    margin-bottom: 30px;
+}
+p.f-elite-subtext {
+    margin-bottom: 30px;
+}
+}
+</style>
+
+<section class="f-cta-elite-{{ section.id }}" id="EliteSection-{{ section.id }}">
+  <div class="f-elite-bg">
+    <div class="f-blob f-blob-1"></div>
+    <div class="f-blob f-blob-2"></div>
+  </div>
+
+  <div class="f-elite-container">
+    {% if section.settings.badge != blank %}
+      <div class="f-elite-badge">✨ {{ section.settings.badge }}</div>
+    {% endif %}
+
+    <h2 class="f-elite-heading">{{ section.settings.heading }}</h2>
+    
+    <p class="f-elite-subtext">{{ section.settings.subtext }}</p>
+
+    {% if section.settings.enable_countdown %}
+      <div class="f-elite-timer" id="EliteTimer-{{ section.id }}">
+        <div class="f-timer-block"><span class="f-timer-val" id="h-{{ section.id }}">00</span><span class="f-timer-unit">Hrs</span></div>
+        <div class="f-timer-block"><span class="f-timer-val" id="m-{{ section.id }}">00</span><span class="f-timer-unit">Min</span></div>
+        <div class="f-timer-block"><span class="f-timer-val" id="s-{{ section.id }}">00</span><span class="f-timer-unit">Sec</span></div>
+      </div>
+    {% endif %}
+
+    <a href="{{ section.settings.button_link }}" class="button f-elite-btn">
+      {{ section.settings.button_label }}
+    </a>
+  </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  {% if section.settings.enable_countdown %}
+    let count = 3600 * 5; 
+    const hEl = document.getElementById('h-{{ section.id }}');
+    const mEl = document.getElementById('m-{{ section.id }}');
+    const sEl = document.getElementById('s-{{ section.id }}');
+
+    function update() {
+      let h = Math.floor(count / 3600);
+      let m = Math.floor((count % 3600) / 60);
+      let s = count % 60;
+      if(hEl) hEl.textContent = String(h).padStart(2, '0');
+      if(mEl) mEl.textContent = String(m).padStart(2, '0');
+      if(sEl) sEl.textContent = String(s).padStart(2, '0');
+      if(count > 0) count--;
+    }
+    setInterval(update, 1000);
+    update();
+  {% endif %}
+});
+</script>
+
+{% schema %}
+{
+  "name": "Final CTA",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 40, "max": 200, "step": 10, "unit": "px",
+      "label": "Top Padding", "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 40, "max": 200, "step": 10, "unit": "px",
+      "label": "Bottom Padding", "default": 120
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#050505"
+    },
+    {
+      "type": "header",
+      "content": "Badge"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge Text",
+      "default": "Premium Experience"
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Badge Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "badge_size",
+      "min": 10, "max": 20, "default": 12, "label": "Badge Size"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Unrivaled Quality. Limited Release."
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 30, "max": 120, "default": 72, "label": "Heading Font Size"
+    },
+    {
+      "type": "header",
+      "content": "Subtext"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Step into a new era of design. Our latest collection is engineered for those who refuse to settle for average."
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Subtext Color",
+      "default": "#a1a1a1"
+    },
+    {
+      "type": "range",
+      "id": "subtext_size",
+      "min": 14, "max": 24, "default": 18, "label": "Subtext Font Size"
+    },
+    {
+      "type": "header",
+      "content": "Timer"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_countdown",
+      "label": "Enable Countdown",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "timer_color",
+      "label": "Timer Numbers Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "timer_size",
+      "min": 20, "max": 60, "default": 32, "label": "Timer Font Size"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "SECURE YOURS NOW"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Accent / Button Color",
+      "default": "#6366f1"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "btn_size",
+      "min": 14, "max": 24, "default": 16, "label": "Button Font Size"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Final CTA"
+    }
+  ]
+}
+{% endschema %}
